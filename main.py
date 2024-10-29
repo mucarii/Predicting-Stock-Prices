@@ -6,18 +6,17 @@ import matplotlib.pyplot as plt
 
 # %%
 dates = []
-close_price = []
+prices = []
 
 
 # %%
 def get_data(GME_stock):
-    global close_price  # Adicionando global para modificar a variável
     with open(GME_stock, "r") as csvfile:
         csvFileReader = csv.reader(csvfile)
-        next(csvFileReader)  # Pular o cabeçalho
+        next(csvFileReader)
         for row in csvFileReader:
             dates.append(int(row[0].split("-")[0]))  # Ano
-            close_price.append(float(row[4]))  # Preço de fechamento
+            prices.append(float(row[2]))  # Preço
 
 
 # %%
@@ -49,7 +48,7 @@ def predict_prices(dates, prices, x):
 
 # %%
 get_data("GME_stock.csv")
-predictions = predict_prices(dates, close_price, 29)
+predictions = predict_prices(dates, prices, 29)
 
 # %%
 print(predictions)
